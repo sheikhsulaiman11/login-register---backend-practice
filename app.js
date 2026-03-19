@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import auth from './middleware/auth.js';
 import dotenv from 'dotenv';
 import session from 'express-session';
+import isAuth from './middleware/auth.js';
 dotenv.config();
 
 const app = express();
@@ -55,9 +56,6 @@ app.post('/login', async (req, res) => {
     res.send("Login successful");
 });
 
-app.get('/dashboard', auth, (req, res) => {
-    res.send('Welcome to the dashboard');
-})
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
