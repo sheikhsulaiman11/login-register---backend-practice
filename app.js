@@ -21,9 +21,9 @@ mongoose.connect(process.env.MONGO_URL)
 
 
 app.use(session({
-  secret: 'secret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
 
 app.get('/test', (req, res) => {
