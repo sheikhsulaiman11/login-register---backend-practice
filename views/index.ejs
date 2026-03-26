@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body class="auth-page">
+    <main class="shell">
+        <section class="hero-card">
+            <div class="hero-copy">
+                <span class="eyebrow">Statefull Access</span>
+                <h1>Secure auth wrapped in a sharper interface.</h1>
+                <p>
+                    A bright, modern sign-in experience for your Express and MongoDB app,
+                    with registration, login, session persistence, and a clean dashboard flow.
+                </p>
+                <div class="hero-points">
+                    <div>
+                        <strong>Session-based</strong>
+                        <span>Protected routes with clean redirects</span>
+                    </div>
+                    <div>
+                        <strong>Responsive UI</strong>
+                        <span>Works across desktop and mobile screens</span>
+                    </div>
+                    <div>
+                        <strong>Minimal setup</strong>
+                        <span>EJS templates and one shared stylesheet</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-panel">
+                <div class="panel-top">
+                    <div>
+                        <p class="panel-label">Welcome back</p>
+                        <h2><%= activeForm === 'register' ? 'Create your account' : 'Sign in to continue' %></h2>
+                    </div>
+                    <div class="tab-switch">
+                        <a href="/?form=login" class="<%= activeForm === 'login' ? 'active' : '' %>">Login</a>
+                        <a href="/?form=register" class="<%= activeForm === 'register' ? 'active' : '' %>">Register</a>
+                    </div>
+                </div>
+
+                <% if (message) { %>
+                    <div class="notice success"><%= message %></div>
+                <% } %>
+
+                <% if (error) { %>
+                    <div class="notice error"><%= error %></div>
+                <% } %>
+
+                <% if (activeForm === 'register') { %>
+                    <form action="/register" method="POST" class="auth-form">
+                        <label for="register-email">Email address</label>
+                        <input id="register-email" type="email" name="email" placeholder="name@example.com" required>
+
+                        <label for="register-password">Password</label>
+                        <input id="register-password" type="password" name="password" placeholder="Create a secure password" minlength="6" required>
+
+                        <button type="submit">Create account</button>
+                    </form>
+                <% } else { %>
+                    <form action="/login" method="POST" class="auth-form">
+                        <label for="login-email">Email address</label>
+                        <input id="login-email" type="email" name="email" placeholder="name@example.com" required>
+
+                        <label for="login-password">Password</label>
+                        <input id="login-password" type="password" name="password" placeholder="Enter your password" required>
+
+                        <button type="submit">Log in</button>
+                    </form>
+                <% } %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
